@@ -6,5 +6,5 @@ public class SolicitudSustentante
     public int solicitudId { get; set; }
     public virtual Solicitud? solicitud {get; set;}
     public int personaId { get; set; }
-    public virtual Persona? persona {get; set;}
+    public virtual Persona persona {get; set;} = null!;
 }

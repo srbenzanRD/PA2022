@@ -1,0 +1,52 @@
+@page "/solicitudes"
+@using PA2022.Data.Models
+<h1>Bandeja de solicitudes</h1>
+<br>
+<button class="btn btn-success"><span class="oi oi-plus"></span></button>
+
+<table class="table">
+<thead>
+    <tr>
+        <th>#</th>
+        <th>Tema</th>
+        <th>Sustentantes</th>
+        <th>Fecha</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var solcicitud in Solicitudes)
+    {
+        <tr>
+            <th>@solcicitud.Id</th>
+            <th>@solcicitud.Tema</th>
+            <th>
+                <table class="table">
+                    <tbody>
+                        @foreach (var sustante in solcicitud.Sustentantes)
+                        {
+                            <tr><th>@sustante.persona.Nombre @sustante.persona.Apellido</th></tr>
+                        }
+                    </tbody>
+                </table>
+            </th>
+            <th>@solcicitud.Fecha</th>
+        </tr>
+    }
+</tbody>
+</table>
+@code{
+    public List<Solicitud> Solicitudes { get; set; } = new List<Solicitud>();
+        protected override async Task OnInitializedAsync()
+        {
+            
+
+            var creado = await SolicitudService.Crear("Informática",
+            new List<Persona>(){
+                 new Persona(){Nombre = "Carlos", Apellido = "Paulino"},
+                 new Persona(){Nombre = "Yessica", Apellido = "Mola"}
+                }
+            );
+
+            Solicitudes = await SolicitudService.Consultar();
+        }
+}
