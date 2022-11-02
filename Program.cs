@@ -11,7 +11,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 
-builder.Services.AddSqlite<Pa2022DbContext>("Data Source=.//Data//Context//localDB.db");
+builder.Services.AddSqlite<Pa2022DbContext>("Data Source=.//Data//Context//localDB.sqlite");
 //Agregamos los servicios para la base de datos
 builder.Services.AddScoped<IPa2022DbContext,Pa2022DbContext>();
 builder.Services.AddScoped<ISolicitudesService,SolicitudesService>();
